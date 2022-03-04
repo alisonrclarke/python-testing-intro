@@ -10,3 +10,11 @@ The demo will show:
 * how to use continuous integration to run your tests on every push, to ensure your software still works even when other changes are made
 
 The demo will use python and pytest (though the principles could be applied to other programming languages), and will use GitHub Actions for continuous integration.
+
+## Initial code
+
+Our starting point is a simple script which generates 16 random numbers and lays them out in a grid:
+
+https://github.com/alisonrclarke/python-testing-intro/blob/7c817c468278965a46bb893888eb7f599f7288f9/main.py#L1-L25
+
+Let's imagine the code is a bit more complex, doing some calculations that take a few seconds to run: we use `time.sleep` to mimic this.
