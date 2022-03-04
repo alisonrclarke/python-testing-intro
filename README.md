@@ -18,3 +18,68 @@ Our starting point is a simple script which generates 16 random numbers and lays
 https://github.com/alisonrclarke/python-testing-intro/blob/7c817c468278965a46bb893888eb7f599f7288f9/main.py#L1-L25
 
 Let's imagine the code is a bit more complex, doing some calculations that take a few seconds to run: we use `time.sleep` to mimic this.
+
+Here's what it looks like when you run it:
+
+```bash
+$ python main.py
+Data: [98, 54, 83, 35, 55, 58, 21, 33, 37, 67, 59, 46, 34, 65, 30, 10]
+Working...
+Grid:
+98	54	83	35
+55	58	21	33
+37	67	59	46
+34	65	30	10
+```
+
+## Varying the data size
+
+Now let's imagine we need to allow the user to determine the size of the data. We use `sys.argv` to get a value from the command line and use that to generate the list of values.
+
+https://github.com/alisonrclarke/python-testing-intro/blob/629d94d2ce69bfbacef3171c0727ac5effc404a3/main.py#L6-L11
+
+(We should ideally check that the user has provided a valid integer and give them an appropriate error message if not, but I'll leave that as an exercise to the reader.)
+
+We then need to determine the grid size from the data size. We want the grid to be square, so as a starting point let's use the square root of `data_size`, using `int` to round it down:
+
+https://github.com/alisonrclarke/python-testing-intro/blob/629d94d2ce69bfbacef3171c0727ac5effc404a3/main.py#L15
+
+We then use `grid_size` as the limit when populating our grid:
+
+https://github.com/alisonrclarke/python-testing-intro/blob/629d94d2ce69bfbacef3171c0727ac5effc404a3/main.py#L18-L23
+
+And we can run it to create different sizes of grid:
+
+```bash
+$ python main.py 9
+Data: [70, 32, 72, 66, 61, 71, 87, 79, 38]
+Working...
+Grid:
+70	32	72
+66	61	71
+87	79	38
+```
+
+```bash
+$ python main.py 16
+Data: [15, 22, 2, 51, 85, 62, 3, 91, 75, 54, 82, 89, 56, 97, 14, 43]
+Working...
+Grid:
+15	22	2	51
+85	62	3	91
+75	54	82	89
+56	97	14	43
+```
+
+But what happens if we try it with a non-square number?
+
+```bash
+python main.py 8
+Data: [93, 81, 59, 71, 19, 65, 4, 72]
+Working...
+Grid:
+93	81
+59	71
+```
+
+Rounding down the grid size isn't working: we're not putting all of our data into the grid. And because of our "complex calculation", trying out different options takes a long time.
