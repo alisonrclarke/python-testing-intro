@@ -188,3 +188,29 @@ main_test.py .                                                         [100%]
 ```
 
 `pytest` has found our test in `main_test.py` and run it, and tells us the test passed. And in 0.01s - must faster than waiting for our "complex function" to run!
+
+## Parameterising tests
+
+We need to add some more test cases, for example non-square numbers. You might have noticed that we had to copy and paste some code earlier to try our function with two different values. `pytest` offers a better way to repeat tests like this: another way to save you time!
+
+https://github.com/alisonrclarke/python-testing-intro/blob/ac96872cf961cda3bd1e724567a6fbb1d8856dcd/main_test.py#L1-L11
+
+We first define an array with our test values as tuples, so in our case the first value is the parameter, and the second is the expected output from `get_grid_size`. Then we use the decorator `@pytest.mark.parametrize("data_size,expected", grid_size_data)` at the top of our function. Don't worry if you're unfamiliar with decorators: for now you just need to know that this decorator will mean that pytest calls the function once for each tuple in `grid_size_data` and passes the tuple as arguments to the function.
+
+So we modify the function to accept the arguments we defined (`data_size` and `expected`) and use them to call `get_grid_size` and check the output.
+
+ Now when we run `pytest` we see:
+
+ ```bash
+ (python-testing-intro-EqBKcORj-py3.7) bash-3.2$ pytest
+============================ test session starts =============================
+platform darwin -- Python 3.7.8, pytest-7.1.1, pluggy-1.0.0
+rootdir: /Users/ksvf48/Documents/dev/python-testing-intro
+collected 2 items                                                            
+
+main_test.py ..                                                        [100%]
+
+============================= 2 passed in 0.01s ==============================
+```
+
+`pytest` has now run two tests, i.e. it has repeated the test with both of our sets of values.
