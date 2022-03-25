@@ -105,3 +105,38 @@ https://github.com/alisonrclarke/python-testing-intro/blob/30ab21f9afcf0ad1393ab
 And then we call our function from `main.py`:
 
 https://github.com/alisonrclarke/python-testing-intro/blob/30ab21f9afcf0ad1393ab1b7293d975359756087/main.py#L23
+
+You can check that this works as before.
+
+## Installing pytest
+
+The next thing we need to do is to install the `pytest` package. Python does come with a built-in testing framework, `unittest`, but `pytest` can be easier to use.
+
+You can install the package using your favourite package manager, whether that's poetry, pipenv, pip, conda or something else. I'm going to use poetry. As I don't currently have any dependencies I'll run `poetry init`, accepting default values for everything, but not adding dependencies yet:
+
+```bash
+$ poetry init
+```
+
+That creates a `pyproject.toml` file containing details of our project.
+
+Now we can install `pytest`, adding it as a dev dependency because it's not needed by people who will run our code, just by people developing it:
+
+```bash
+poetry add --dev pytest
+```
+
+We can now open a shell in a poetry environment to run our code as before:
+
+```bash
+$ poetry shell
+(python-testing-intro-EqBKcORj-py3.7) bash-3.2$ python main.py 9
+Data: [53, 86, 60, 13, 40, 59, 71, 83, 10]
+Working...
+Grid:
+53	86	60
+13	40	59
+71	83	10
+```
+
+(If you don't use poetry or already have an environment set up, just use `pip install pytest` or `conda install pytest` in your environment.)
