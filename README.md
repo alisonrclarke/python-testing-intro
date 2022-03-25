@@ -105,3 +105,62 @@ https://github.com/alisonrclarke/python-testing-intro/blob/30ab21f9afcf0ad1393ab
 And then we call our function from `main.py`:
 
 https://github.com/alisonrclarke/python-testing-intro/blob/30ab21f9afcf0ad1393ab1b7293d975359756087/main.py#L23
+
+You can check that this works as before.
+
+## Installing pytest
+
+The next thing we need to do is to install the `pytest` package. Python does come with a built-in testing framework, `unittest`, but `pytest` can be easier to use.
+
+You can install the package using your favourite package manager, whether that's pipenv, pip, conda, poetry or something else. I'm going to use pipenv.
+
+I'm installing `pytest` as a dev dependency because it's not needed by people who will run our code, just by people developing it:
+
+```
+$ pipenv install pytest
+Creating a virtualenv for this project...
+Pipfile: /Users/ksvf48/Documents/dev/python-testing-intro/Pipfile
+Using /usr/local/opt/python/libexec/bin/python (3.9.12) to create virtualenv...
+⠹ Creating virtual environment...created virtual environment CPython3.9.12.final.0-64 in 1584ms
+  creator CPython3Posix(dest=/Users/ksvf48/.virtualenvs/python-testing-intro-mUyCU3bK, clear=False, no_vcs_ignore=False, global=False)
+  seeder FromAppData(download=False, pip=bundle, setuptools=bundle, wheel=bundle, via=copy, app_data_dir=/Users/ksvf48/Library/Application Support/virtualenv)
+    added seed packages: pip==22.0.4, setuptools==61.0.0, wheel==0.37.1
+  activators BashActivator,CShellActivator,FishActivator,NushellActivator,PowerShellActivator,PythonActivator
+
+✔ Successfully created virtual environment!
+Virtualenv location: /Users/ksvf48/.virtualenvs/python-testing-intro-mUyCU3bK
+Creating a Pipfile for this project...
+Installing pytest...
+Adding pytest to Pipfile's [packages]...
+✔ Installation Succeeded
+Pipfile.lock not found, creating...
+Locking [dev-packages] dependencies...
+Locking [packages] dependencies...
+Building requirements...
+Resolving dependencies...
+✔ Success!
+Updated Pipfile.lock (1ffa2d)!
+Installing dependencies from Pipfile.lock (1ffa2d)...
+  🐍   ▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉ 0/0 — 00:00:00
+To activate this project's virtualenv, run pipenv shell.
+Alternatively, run a command inside the virtualenv with pipenv run.
+```
+
+That creates files `Pipfile` and `Pipfile.lock` containing our dependencies.
+
+We can now open a shell in the virtualenv created by pipenv, to run our code as before:
+
+```bash
+$ pipenv shell
+Launching subshell in virtual environment...
+...
+(python-testing-intro) bash-3.2$ python main.py 9
+Data: [53, 86, 60, 13, 40, 59, 71, 83, 10]
+Working...
+Grid:
+53	86	60
+13	40	59
+71	83	10
+```
+
+(If you don't use pipenv or already have an environment set up, just use `poetry install pytest`, `pip install pytest` or `conda install pytest` in your environment.)
