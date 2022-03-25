@@ -97,3 +97,11 @@ We then add this 'magic' idiom at the bottom of the file:
 https://github.com/alisonrclarke/python-testing-intro/blob/bb57a5b24de65ea633f812b567a25c3c34019a2b/main.py#L39-L41
 
 What this does is to call the `main` function whenever the file is run from the command line, so the behaviour will be as it was before.
+
+We should also put the code we want to test in a new function:
+
+https://github.com/alisonrclarke/python-testing-intro/blob/30ab21f9afcf0ad1393ab1b7293d975359756087/main.py#L7-L9
+
+And then we call our function from `main.py`:
+
+https://github.com/alisonrclarke/python-testing-intro/blob/30ab21f9afcf0ad1393ab1b7293d975359756087/main.py#L23
