@@ -82,4 +82,18 @@ Grid:
 59	71
 ```
 
-Rounding down the grid size isn't working: we're not putting all of our data into the grid. And because of our "complex calculation", trying out different options takes a long time.
+Rounding down the grid size isn't working: we're not putting all of our data into the grid. And because of our "complex calculation", trying out different options takes a long time. Wouldn't it be great if we could just try out the part of the code that calculates the grid size, with different options? Automated tests can help us!
+
+## Testing preparation
+
+When we write our test we will want to keep it apart from the rest of the code, so we'll put it in a new file. From that new file we'll need to import our current **main.py** file. But if we do that currently, it will run all of the code on import, including the parts that take a long time. So the first thing we need to do is to put our current code into a function:
+
+https://github.com/alisonrclarke/python-testing-intro/blob/bb57a5b24de65ea633f812b567a25c3c34019a2b/main.py#L7-L12
+
+(The rest of our code is also indented now.)
+
+We then add this 'magic' idiom at the bottom of the file:
+
+https://github.com/alisonrclarke/python-testing-intro/blob/bb57a5b24de65ea633f812b567a25c3c34019a2b/main.py#L39-L41
+
+What this does is to call the `main` function whenever the file is run from the command line, so the behaviour will be as it was before.
