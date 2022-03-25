@@ -4,6 +4,10 @@ import sys
 import time
 
 
+def get_grid_size(data_size):
+    """Determine the size of the closest square to hold this data"""
+    return int(math.sqrt(data_size))
+
 def main():
     """Function to put data into a square grid and do something complicated
     with it"""
@@ -16,7 +20,7 @@ def main():
     print(f"Data: {data}")
 
     # Put the data in a grid
-    grid_size = int(math.sqrt(data_size))
+    grid_size = get_grid_size(data_size)
     grid = []
     i = 0
     for r in range(grid_size):
