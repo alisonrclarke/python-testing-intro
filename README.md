@@ -175,8 +175,8 @@ https://github.com/alisonrclarke/python-testing-intro/blob/ba85d4e80efab4fb997ae
 
 We run the test as follows:
 
-```bash
-(python-testing-intro-EqBKcORj-py3.7) bash-3.2$ pytest
+```
+$ pytest
 ============================ test session starts =============================
 platform darwin -- Python 3.7.8, pytest-7.1.1, pluggy-1.0.0
 rootdir: /Users/ksvf48/Documents/dev/python-testing-intro
@@ -201,8 +201,8 @@ So we modify the function to accept the arguments we defined (`data_size` and `e
 
  Now when we run `pytest` we see:
 
- ```bash
- (python-testing-intro-EqBKcORj-py3.7) bash-3.2$ pytest
+ ```
+ $ pytest
 ============================ test session starts =============================
 platform darwin -- Python 3.7.8, pytest-7.1.1, pluggy-1.0.0
 rootdir: /Users/ksvf48/Documents/dev/python-testing-intro
@@ -214,3 +214,67 @@ main_test.py ..                                                        [100%]
 ```
 
 `pytest` has now run two tests, i.e. it has repeated the test with both of our sets of values.
+
+So far our tests have passed. But remember when we tried passing a non-square number? Let's add some extra cases to our parameterised tests:
+
+https://github.com/alisonrclarke/python-testing-intro/blob/1bf5764debbc49d07d01fa15e238df636c1867d9/main_test.py#L4-L9
+
+Now two of our tests fail:
+
+```
+$ pytest
+============================ test session starts =============================
+platform darwin -- Python 3.7.8, pytest-7.1.1, pluggy-1.0.0
+rootdir: /Users/ksvf48/Documents/dev/python-testing-intro
+collected 4 items                                                            
+
+main_test.py ..FF                                                      [100%]
+
+================================== FAILURES ==================================
+__________________________ test_get_grid_size[10-4] __________________________
+
+data_size = 10, expected = 4
+
+    @pytest.mark.parametrize("data_size,expected", grid_size_data)
+    def test_get_grid_size(data_size, expected):
+>       assert get_grid_size(data_size) == expected
+E       assert 3 == 4
+E        +  where 3 = get_grid_size(10)
+
+main_test.py:13: AssertionError
+__________________________ test_get_grid_size[15-4] __________________________
+
+data_size = 15, expected = 4
+
+    @pytest.mark.parametrize("data_size,expected", grid_size_data)
+    def test_get_grid_size(data_size, expected):
+>       assert get_grid_size(data_size) == expected
+E       assert 3 == 4
+E        +  where 3 = get_grid_size(15)
+
+main_test.py:13: AssertionError
+========================== short test summary info ===========================
+FAILED main_test.py::test_get_grid_size[10-4] - assert 3 == 4
+FAILED main_test.py::test_get_grid_size[15-4] - assert 3 == 4
+======================== 2 failed, 2 passed in 0.04s =========================
+```
+
+So we've shown that our function isn't behaving as we'd like - now let's fix it. In this case we just want to alter the code so that it uses the `math.ceil` function to return the nearest integer greater than or equal to the square root:
+
+https://github.com/alisonrclarke/python-testing-intro/blob/1bf5764debbc49d07d01fa15e238df636c1867d9/main.py#L7-L9
+
+And our tests now pass:
+
+```
+$ pytest
+============================ test session starts =============================
+platform darwin -- Python 3.7.8, pytest-7.1.1, pluggy-1.0.0
+rootdir: /Users/ksvf48/Documents/dev/python-testing-intro
+collected 4 items                                                            
+
+main_test.py ....                                                      [100%]
+
+============================= 4 passed in 0.01s ==============================
+```
+
+We might want to add further test cases, like 0, negative numbers, very large numbers etc. But the good news is if we did do that they would take barely any additional time to run. All our test cases would probably run in well under a second - that's a lot quicker than waiting for our code to run, and typing in the parameters on the command line, and hoping you don't miss a case.
