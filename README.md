@@ -278,3 +278,33 @@ main_test.py ....                                                      [100%]
 ```
 
 We might want to add further test cases, like 0, negative numbers, very large numbers etc. But the good news is if we did do that they would take barely any additional time to run. All our test cases would probably run in well under a second - that's a lot quicker than waiting for our code to run, and typing in the parameters on the command line, and hoping you don't miss a case.
+
+## Keep the tests running
+
+You might not think we've saved much time so far: this has taken a bit of time to set up, and we could see how to fix the function before we started writing tests. What we've got now, however, is a test that will flag up if anything changes in future that might break that functionality. And now we've added one test, it will take less time to add further tests for other tricky parts of the code later on.
+
+One way to ensure we don't forget to run our tests after making further changes is to set up continuous integration. That might sound a bit scary but it's actually really easy to set up using GitHub Actions.
+
+You can go to the GitHub Actions tab, then select an action that looks like your project. I chose **python appplication** and then made some changes to the file so that it would run using pipenv. My CI file now looks like this:
+
+https://github.com/alisonrclarke/python-testing-intro/blob/93f8ba2dbd4389e89aee9b21cf903ae7c2d211cf/.github/workflows/python-test.yml#L1-L39
+
+It looks a bit complicated but here's a breakdown:
+
+ * `name` is self-explanatory
+ * `on` tells the job when it should be run. Here we say the job should run on any pushes to the `main` branch, and whenever a pull request is opened on the `main` branch.
+ * `permissions` sets the access given to the git repository. We only need to read it.
+ * `jobs` is where things happen. We have a single job called `build`, which runs on Ubuntu, and runs the following steps:
+    1. Checks out the code
+    2. Installs Python
+    3. Installs the dependencies (first pipenv and flake8 (syntax checker), then installs our pipenv environment)
+    4. Lints the code (checks for syntax errors) using flake8
+    5. Runs the tests
+
+This is only a whistle-stop introduction to CI with GitHub Actions but you can find out more using the [GitHub Actions docs](https://docs.github.com/en/actions). (Other CI providers are available too, like [CircleCI](https://circleci.com) and [Travis CI](http://www.travis-ci.com]).
+
+## Have we saved time?
+
+Maybe we haven't saved very much time yet...But I think our future selves will thank us for the tests!
+
+If you want to find out more, the [pytest docs](https://docs.pytest.org/en/7.1.x/contents.html) are a good place to start. There's also a good guide to software testing on the [SSI blog](https://software.ac.uk/resources/guides/testing-your-software).
