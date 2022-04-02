@@ -164,3 +164,27 @@ Grid:
 ```
 
 (If you don't use pipenv or already have an environment set up, just use `poetry install pytest`, `pip install pytest` or `conda install pytest` in your environment.)
+
+## First test
+
+We now create a file `main_test.py` with the following contents:
+
+https://github.com/alisonrclarke/python-testing-intro/blob/ba85d4e80efab4fb997aed4736f6c14a58242cca/main_test.py#L1-L5
+
+`pytest` will find any file named `test_*.py` or `*_test.py` and run any functions with names starting `test_`. So here, we import our function from `main.py`, then use `assert`, which will raise an error if what follows does not evaluate to `True`, e.g. bool `False`, non-zero values, values that are not None. So we assert that the value returned by `get_grid_size` will be 3 when called with value 9, and 4 when called with value 16.
+
+We run the test as follows:
+
+```bash
+(python-testing-intro-EqBKcORj-py3.7) bash-3.2$ pytest
+============================ test session starts =============================
+platform darwin -- Python 3.7.8, pytest-7.1.1, pluggy-1.0.0
+rootdir: /Users/ksvf48/Documents/dev/python-testing-intro
+collected 1 item                                                             
+
+main_test.py .                                                         [100%]
+
+============================= 1 passed in 0.01s ==============================
+```
+
+`pytest` has found our test in `main_test.py` and run it, and tells us the test passed. And in 0.01s - must faster than waiting for our "complex function" to run!
