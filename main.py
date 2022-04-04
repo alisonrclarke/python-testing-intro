@@ -26,7 +26,7 @@ def main():
     for r in range(grid_size):
         row = []
         for c in range(grid_size):
-            row.append(data[i])
+            row.append(data[i] if i < data_size else -1)
             i += 1
         grid.append(row)
 
