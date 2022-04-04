@@ -308,3 +308,15 @@ This is only a whistle-stop introduction to CI with GitHub Actions but you can f
 Maybe we haven't saved very much time yet...But I think our future selves will thank us for the tests!
 
 If you want to find out more, the [pytest docs](https://docs.pytest.org/en/7.1.x/contents.html) are a good place to start. There's also a good guide to software testing on the [SSI blog](https://software.ac.uk/resources/guides/testing-your-software).
+
+## P.S.
+
+The eagle-eyed amongst you may have spotted a (deliberate?) mistake in the code in the `main` function after the fix to `get_grid_size`: the grid is now bigger than the list if the number is not square, so we get an `IndexError`. We can fix this by modifying the loop to look like this:
+
+https://github.com/alisonrclarke/python-testing-intro/blob/0c1eb6cbf507dd843a15fe5161c657e5076fdacc/main.py#L26-L31
+
+i.e. we check if `i` is in the range of the list, and use a default vaue (`-1`) if not.
+
+Shouldn't our test have caught this? I'd say our single test should not have (as it is just checking the function that determines the grid size), but our test suite (a fancy way of saying "all of the tests") should have caught it. What we should do is to add another test for laying out the numbers in the grid: we could extract that code into its own function too, and add a second test in `main_test.py`. I'll leave that as an exercise to the reader ;)
+
+The fact remains that automated tests aren't infallible - they're a brilliant tool but even if you have 100% test coverage (i.e. every single line of code is run with your tests) there's no guarantee that your code is bug-free.
